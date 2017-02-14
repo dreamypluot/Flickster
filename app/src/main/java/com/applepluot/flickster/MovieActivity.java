@@ -28,10 +28,19 @@ public class MovieActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie);
+        // 1. define model
+        // 2. define data fixtures
+        // 3. define a layout item template
+        // 4. define an adapter
+        // 5. plug the adapter to the list view
 
+
+        // Find the list view
         lvItems = (ListView) findViewById(R.id.lvMovies);
         movies = new ArrayList<>();
+        // Create the adapter
         movieAdapter = new MovieArrayAdapter(this, movies);
+        // Bind the adapter to the list view
         lvItems.setAdapter(movieAdapter);
 
         String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
