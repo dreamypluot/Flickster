@@ -1,6 +1,8 @@
 package com.applepluot.flickster.adapters;
 
 import android.content.Context;
+import android.content.res.Configuration;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +15,11 @@ import com.applepluot.flickster.R;
 import com.applepluot.flickster.models.Movie;
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 import static com.applepluot.flickster.R.id.tvOverview;
 import static com.applepluot.flickster.R.id.tvTitle;
@@ -55,17 +61,44 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
             // View is being recycled, retrieve the viewHolder object from tag
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        // look up data for population
-        ImageView imageView = (ImageView) convertView.findViewById(R.id.ivMovieImage);
+
+        ImageView imageView = null;
+
+        if(getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            // look up data for population
+            imageView = (ImageView) convertView.findViewById(R.id.ivMovieImage);
+        } else {
+            imageView = (ImageView) convertView.findViewById(R.id.ivBackdropImage);
+        }
         //clear out image from convertView
         imageView.setImageResource(0);
         // Populate the data from the data object via the viewHolder object
         // into the template view.
+
         assert movie != null;
         // Populate the data into the template view
         viewHolder.title.setText(movie.getOriginalTitle());
         viewHolder.overview.setText(movie.getOverview());
-        Picasso.with(getContext()).load(movie.getPosterPath()).into(imageView);
+        // load image
+        InputStream ims = null;
+        try {
+            ims = getContext().getAssets().open("ic_launcher.png");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // load image as Drawable
+        Drawable placeholder = Drawable.createFromStream(ims, null);
+        if(getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            Picasso.with(getContext()).load(movie.getPosterPath())
+                    .placeholder(placeholder)
+                    .transform(new RoundedCornersTransformation(10, 10))
+                    .resize(0, 560).into(imageView);
+        } else {
+            Picasso.with(getContext()).load(movie.getBackdropPath())
+                    .placeholder(placeholder)
+                    .transform(new RoundedCornersTransformation(10, 10))
+                    .resize(0, 560).into(imageView);
+        }
         return convertView;
     }
 }

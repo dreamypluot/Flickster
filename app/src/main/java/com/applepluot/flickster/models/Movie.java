@@ -14,9 +14,17 @@ public class Movie {
     String posterPath;
     String originalTitle;
     String overview;
+    String backdropPath;
+    Double vote;
+
+    static String BASE_PATH = "https://image.tmdb.org/t/p";
 
     public String getPosterPath() {
-        return String.format("https://image.tmdb.org/t/p/w342/%s", posterPath);
+        return String.format("%s/w342/%s", BASE_PATH, posterPath);
+    }
+
+    public String getBackdropPath() {
+        return String.format("%s/w780/%s", BASE_PATH, backdropPath);
     }
 
     public String getOriginalTitle() {
@@ -31,6 +39,8 @@ public class Movie {
         this.posterPath = jsonObject.getString("poster_path");
         this.originalTitle = jsonObject.getString("original_title");
         this.overview = jsonObject.getString("overview");
+        this.vote = jsonObject.getDouble("vote_average");
+        this.backdropPath = this.vote > 5? jsonObject.getString("backdrop_path") : "";
     }
 
     public static ArrayList<Movie> fromJsonArray(JSONArray array) {

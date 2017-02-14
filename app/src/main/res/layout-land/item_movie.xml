@@ -18,8 +18,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:id="@+id/ivMovieImage"/>
+        android:id="@+id/ivBackdropImage"/>
 
     <TextView
         tools:text="Return of Xander Cage"
@@ -39,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvTitle"
-        android:layout_toRightOf="@+id/ivMovieImage"
+        android:layout_toRightOf="@+id/ivBackdropImage"
         android:textColor="@color/lightGrey"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
