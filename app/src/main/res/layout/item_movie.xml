@@ -3,6 +3,7 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
+                android:background="@color/darkGray"
                 android:layout_height="match_parent">
 
     <ImageView
@@ -25,7 +26,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/tvTitle"
         android:textSize="24sp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_alignLeft="@+id/tvOverview"
@@ -37,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvTitle"
         android:layout_toRightOf="@+id/ivMovieImage"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/lightGrey"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
