@@ -35,6 +35,10 @@ public class Movie {
         return overview;
     }
 
+    public double getRating() {
+        return vote.doubleValue();
+    }
+
     public Movie(JSONObject jsonObject) throws JSONException {
         this.posterPath = jsonObject.getString("poster_path");
         this.originalTitle = jsonObject.getString("original_title");
